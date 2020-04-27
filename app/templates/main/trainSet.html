@@ -1,0 +1,133 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+	<div id="content-wrapper">
+		<ul class="breadcrumb breadcrumb-page">
+			<div class="breadcrumb-label text-light-gray">You are here: </div>
+			<li><a href="/">Home</a></li>
+			<li class="active"><a href="#">학습</a></li>
+		</ul>
+		<div class="page-header">
+			<h1>Train Set</h1>			
+		</div> <!-- / .page-header -->
+
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">모델 선택</span>
+					</div>
+					<div class="panel-body">
+						<div class="note note-info">학습할 모델을 선택해주세요.(모델등록에서 등록된 모델만 표시됩니다.)</div>
+
+						<select class="form-control" id="select2Model">
+							<option></option>
+							<option value="1">model 1</option>
+							<option value="2">model 2</option>
+							<option value="3">model 3</option>
+							<option value="4">model 4</option>
+							<option value="5">model 5</option>
+						</select>
+						<hr>
+						<div class="panel-padding">
+							<h4>선택된 모델 이름<small>(type : 모델타입)</small></h4>
+							<p class="text-info">모델 설명 표시 ..... </p>
+							<p class="text-info">모델 상태 표시</p>
+							<p class="text-info">등록일 표시 </p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-8">
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">라벨 데이터 입력</span>
+					</div>
+					<div class="panel-body form-horizontal">
+						<div class="note note-info">선택된 모델의 학습 데이터 파일을 선택하고 파일업로드 버튼을 눌러주세요.</div>
+
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th class="panel-padding-h col-sm-2">라벨명</th>
+									<th class="panel-padding-h col-sm-4">설명</th>
+									<th class="panel-padding-h col-sm-6">학습데이터</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>									
+									<td class="panel-padding">
+										<h4 class="list-group-item-heading">라벨 1</h4>									
+									</td>
+									<td class="panel-padding">
+										<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit..</p>							
+									</td>
+									<td class="panel-padding">
+										<form action = "trainSet/upload" method = "POST" enctype = "multipart/form-data">
+											<div class="col-sm-9">
+												<input type="file" class="fileInputLabel" id="file1" name="file">
+											</div>
+											<div class="col-sm-3">
+												<button class="btn btn-warning" type="submit" name="fileUploadBtn">파일업로드</button>
+											</div>
+									</form>
+									</td>
+								</tr>
+								<tr>
+									<td class="panel-padding">
+										<h4 class="list-group-item-heading">라벨 2</h4>									
+									</td>
+									<td class="panel-padding">
+										<p class="list-group-item-text">라벨 2 설명... </p>							
+									</td>
+									<td class="panel-padding">
+										<div class="col-sm-9">
+											<input type="file" class="fileInputLabel" id="file2">
+										</div>
+										<div class="col-sm-3">
+											<button class="btn btn-warning" type="button" name="fileUploadBtn">파일업로드</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="panel-padding">
+										<h4 class="list-group-item-heading">라벨 3</h4>
+									</td>
+									<td class="panel-padding">
+										<p class="list-group-item-text">라벨 3 설명... </p>
+									</td>
+									<td class="panel-padding">
+										<div class="col-sm-9">
+										<input type="file" class="fileInputLabel" id="file3">
+										</div>
+										<div class="col-sm-3">
+											<button class="btn btn-warning" type="button" name="fileUploadBtn">파일업로드</button>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<button class="btn btn-secondary" type="button">취소(업로드파일 삭제)</button>
+						<button class="btn btn-primary" type="button" id="modalTrnBtn" >모델학습하기</button>
+					</div>  <!-- panel-body -->
+				</div>  <!-- panel -->
+			</div>
+
+		</div> <!-- row -->
+	</div> <!-- / #content-wrapper -->	
+{% endblock %}
+
+{% block script %}
+<script>
+$("#select2Model").select2({
+	allowClear: true,
+	placeholder: "Select a Model"
+});
+$("#select2Model").on("change", function(e){
+	alert('change : ' + $("#select2Model").val());
+});
+
+$('.fileInputLabel').pixelFileInput({ placeholder: 'No file selected...' });
+</script>
+{% endblock %}

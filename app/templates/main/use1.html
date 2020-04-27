@@ -1,0 +1,77 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+	<div id="content-wrapper">
+		<ul class="breadcrumb breadcrumb-page">
+			<div class="breadcrumb-label text-light-gray">You are here: </div>
+			<li><a href="/">Home</a></li>
+			<li><a href="#">활용</a></li>
+			<li class="active"><a href="#">핵심단어 그래프</a></li>
+		</ul>
+		<div class="page-header">
+			<h1>핵심단어 그래프(활용1)</h1>
+		</div> <!-- / .page-header -->
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">모델선택</span>
+					</div>
+					<div class="panel-body form-horizontal">
+						<div class="note note-info">모델선택후 분석하기 버튼누르면 결과를 보실수 있습니다.</div>
+						<div class="row form-group">							
+							<div class="col-sm-10">
+								<label class="col-sm-1 control-label">모델선택</label>
+								<div class="col-sm-10">
+									<select class="form-control" id="select2Model">
+										<option>모델선택</option>
+										<option value="1">model 1</option>
+										<option value="2">model 2</option>
+										<option value="3">model 3</option>
+										<option value="4">model 4</option>
+										<option value="5">model 5</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-sm-2">							
+								<button class="btn btn-primary" type="button" id="keywordSearchBtn" >분석하기</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+		 <div class="col-sm-12">
+				<div class="panel">
+					<div class="panel-heading">
+						<span class="panel-title">모델정보</span>
+					</div>
+					<div class="panel-body form-horizontal">
+						<div class="note note-info">학습된 모델의 주요 단어를 표시합니다.</div>
+
+						<div>
+							그래프~!!!
+						</div>
+
+					</div>  <!-- panel-body -->
+				</div>  <!-- panel -->
+			</div>
+
+		</div> <!-- row -->
+	</div> <!-- / #content-wrapper -->	
+{% endblock %}
+
+{% block script %}
+<script>
+$("#select2Model").select2({
+	allowClear: true,
+	placeholder: "Select a Model"
+});
+$("#select2Model").on("change", function(e){
+	alert('change : ' + $("#select2Model").val());
+});
+</script>
+{% endblock %}

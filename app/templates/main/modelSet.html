@@ -1,0 +1,197 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+	<div id="content-wrapper">
+
+		<ul class="breadcrumb breadcrumb-page">
+			<div class="breadcrumb-label text-light-gray">You are here: </div>
+			<li><a href="/">Home</a></li>
+			<li class="active"><a href="#">모델등록</a></li>
+		</ul>
+
+		<div class="page-header">
+			<h1>Model Set</h1>			
+		</div> <!-- / .page-header -->
+
+		<div class="panel colourable">
+			<div class="panel-heading">
+				<!-- <span class="panel-title ml-5">Model List</span> -->
+				<button class="btn btn-rounded btn-labeled btn-xs btn-warning" id="addBtn">
+					<span class="fa fa-plus-square"></span>&nbsp;&nbsp;모델추가 
+				</button>
+				<div class="panel-heading-controls" style="width:30%">
+					<form action="">
+						<div class="input-group input-group-sm">
+							<input type="text" class="form-control" placeholder="Search..." name="s">
+							<span class="input-group-btn">
+								<button class="btn" type="submit">
+									<span class="fa fa-search"></span>
+								</button>
+							</span>
+						</div> <!-- / .input-group -->
+					</form>
+				</div> <!-- / .panel-heading-controls -->				
+			</div> <!-- / .panel-heading -->
+			<div class="panel-body">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>모델명</th>
+							<th>타입</th>
+							<th>설명</th>
+							<th>상태</th>
+							<th>등록일</th>							
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>영화리뷰 모델</td>
+							<td>doc2vec type</td>
+							<td>영화리뷰 문장을 학습한 모델</td>
+							<td>학습완료</td>
+							<td>2020-02-30</td>
+						</tr>
+						<tr>
+							<td>규격서 모델</td>
+							<td>doc2vec type</td>
+							<td>규격서를 학습한 모델</td>
+							<td>학습데이터 입력중</td>
+							<td>2020-02-30</td>
+						</tr>
+						<tr>
+							<td>단어의미 모델</td>
+							<td>word2vec type</td>
+							<td>영화리뷰 문장을 학습한 모델</td>
+							<td>미학습</td>
+							<td>2020-02-30</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div> <!-- / .panel -->
+
+	</div> <!-- / #content-wrapper -->
+
+	<!-- Modal : style="width:1000px; height:700px;" -->
+	<div class="modal fade" id="modelInfoModal" tabindex="-1" role="dialog" style="display: none;">  
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content" >
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title">모델 정보</h4>
+					</div>  <!-- modal-header -->
+					<div class="modal-body form-horizontal">
+						<input type="hidden" id="modelId" value="">  
+							<div class="row form-group">
+									<label class="col-sm-1 control-label">모델명</label>
+									<div class="col-sm-11">
+										<input type="text" class="form-control" id="modelName" placeholder="모델명" value="">
+									</div>
+							</div>
+							<div class="row form-group">
+									<label class="col-sm-1 control-label">타입</label>
+									<div class="col-sm-11">
+										<select class="form-control" id="modelType">
+											<option>선택하세요.</option>
+											<option value="1">word2vec</option>
+											<option value="2">doc2vec</option>
+										</select>
+									</div>
+							</div>
+							<div class="row form-group">
+									<label class="col-sm-1 control-label">설명</label>
+									<div class="col-sm-11">
+										<input type="text" class="form-control" id="modelDes" placeholder="모델설명" value="">
+									</div>           
+							</div>
+							<div class="row form-group">
+									<label class="col-sm-1 control-label">등록일</label>
+									<div class="col-sm-11">
+										<input type="date" class="form-control" id="rDate" placeholder="등록일" value="" readonly>
+									</div>           
+							</div>
+
+							<div class="panel">
+								<div class="panel-heading">
+									<span class="panel-title">라벨 정보</span>
+								</div>
+								<div class="panel-body select2-disabled-examples select2-colors-examples">
+									<div class="note note-info">라벨 생성 및 확인. 이미 생성된 모델은 라벨 추가/삭제가 불가능합니다.</div>
+										<div class="row form-group">
+												<label class="col-sm-1 control-label">라벨명</label>
+												<div class="col-sm-3">
+													<input type="text" class="form-control" id="labelName1" placeholder="라벨명" value="">
+												</div>
+												<label class="col-sm-1 control-label">설명</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="labelDes1" placeholder="라벨설명" value="">
+												</div>           
+										</div>
+										<div class="row form-group">
+												<label class="col-sm-1 control-label">라벨명</label>
+												<div class="col-sm-3">
+													<input type="text" class="form-control" id="labelName2" placeholder="라벨명" value="">
+												</div>
+												<label class="col-sm-1 control-label">설명</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="labelDes2" placeholder="라벨설명" value="">
+												</div>           
+										</div>
+										<div class="row form-group">
+												<label class="col-sm-1 control-label">라벨명</label>
+												<div class="col-sm-3">
+													<input type="text" class="form-control" id="labelName3" placeholder="라벨명" value="">
+												</div>
+												<label class="col-sm-1 control-label">설명</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="labelDes3" placeholder="라벨설명" value="">
+												</div>           
+										</div>
+										<div class="row form-group">
+												<label class="col-sm-1 control-label">라벨명</label>
+												<div class="col-sm-3">
+													<input type="text" class="form-control" id="labelName4" placeholder="라벨명" value="">
+												</div>
+												<label class="col-sm-1 control-label">설명</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="labelDes4" placeholder="라벨설명" value="">
+												</div>
+										</div>
+										<div class="row form-group">
+												<label class="col-sm-1 control-label">라벨명</label>
+												<div class="col-sm-3">
+													<input type="text" class="form-control" id="labelName5" placeholder="라벨명" value="">
+												</div>
+												<label class="col-sm-1 control-label">설명</label>
+												<div class="col-sm-7">
+													<input type="text" class="form-control" id="labelDes5" placeholder="라벨설명" value="">
+												</div>
+										</div>
+										<div class="row form-group">
+											<button class="btn btn-rounded btn-labeled btn-xs btn-warning" id="labelAddBtn">
+												<span class="fa fa-plus-square"></span>&nbsp;&nbsp;라벨추가 
+											</button>
+										</div>
+							</div>
+					</div> <!-- modal-body -->
+
+					<div class="modal-footer">
+							<button class="btn btn-secondary" type="button" id="closeBtn" data-dismiss="modal">확인</button>
+							<button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+							<button class="btn btn-primary" type="button" id="modalSaveBtn" data-dismiss="modal">저장</button>
+					</div>  <!-- modal-footer -->
+
+			</div>  <!-- modal-content -->
+		</div>  <!-- modal-dialog -->
+	</div>  <!-- modal -->
+{% endblock %}
+
+{% block script %}
+<script>
+$(document).ready(function() {  
+	$('#addBtn').click(function() {
+		$('#modelInfoModal').modal();
+	});
+});
+</script>
+{% endblock %}
